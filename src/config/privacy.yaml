@@ -1,0 +1,15 @@
+# Privacy-specific configuration overrides
+
+privacy:
+  differential_privacy: true
+  dp_noise_multiplier: 0.05
+  dp_clip_norm: 1.0
+  privacy_budget: 0.5
+  secure_aggregation: true
+
+training:
+  epochs: 15
+
+optimization:
+  quantization: true
+  pruning: true

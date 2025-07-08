@@ -1,0 +1,43 @@
+# Default configuration for federated learning experiment
+
+dataset:
+  name: UCI_HAR
+  input_dim: 561
+  num_classes: 6
+
+model:
+  type: FNN
+  hidden_layers:
+    - 128
+    - 64
+  activation: ReLU
+  output_activation: Softmax
+
+training:
+  optimizer: Adam
+  learning_rate: 0.001
+  batch_size: 32
+  epochs: 10
+
+federated:
+  rounds: 30
+  clients_per_round: 10
+  total_clients: 30
+  aggregation: FedAvg
+
+privacy:
+  differential_privacy: false
+  dp_noise_multiplier: 0.01
+  dp_clip_norm: 1.0
+  privacy_budget: 1.0
+  secure_aggregation: false
+
+optimization:
+  quantization: false
+  pruning: false
+  adaptive_client_selection: false
+
+logging:
+  log_interval: 10
+  save_checkpoints: true
+  checkpoint_dir: results/checkpoints
