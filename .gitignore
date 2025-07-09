@@ -6,6 +6,7 @@ __pycache__/
 #Actual Files
 data/processed
 data/raw
+results/
 
 # C extensions
 *.so
