@@ -1,41 +1,95 @@
-import torch
-import numpy as np
 import os
+import torch
+import torch.nn as nn
+import torch.optim as optim
 from torch.utils.data import DataLoader
+import numpy as np
 from src.datasets.har_dataset import HARDataset
 from src.models.fnn import FNN
-from src.federated.client import Client
-from src.federated.server import Server
-from src.federated.aggregation import fedavg
-from src.privacy.differential_privacy import add_dp_noise
+from src.config.training_config import MODEL_CONFIG, TRAINING_CONFIG, FL_CONFIG
+from src.federated.aggregation import federated_averaging
+
+def train_client_model(client_id, X, y, global_model_state, epochs=5):
+    """
+    Train a client model for federated learning.
+    """
+    device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
+    
+    # Create model and load global weights
+    model = FNN(**MODEL_CONFIG).to(device)
+    model.load_state_dict(global_model_state)
+    
+    # Setup training
+    criterion = nn.CrossEntropyLoss()
+    optimizer = optim.Adam(
+        model.parameters(), 
+        lr=TRAINING_CONFIG['learning_rate'],
+        weight_decay=TRAINING_CONFIG['weight_decay']
+    )
+    
+    # Create dataset and dataloader
+    dataset = HARDataset(X, y)
+    dataloader = DataLoader(dataset, batch_size=TRAINING_CONFIG['batch_size'], shuffle=True)
+    
+    model.train()
+    for epoch in range(epochs):
+        for batch_data, batch_labels in dataloader:
+            batch_data, batch_labels = batch_data.to(device), batch_labels.to(device)
+            
+            optimizer.zero_grad()
+            outputs = model(batch_data)
+            loss = criterion(outputs, batch_labels)
+            loss.backward()
+            optimizer.step()
+    
+    return model.state_dict()
 
 def main():
     processed_dir = 'data/processed'
-    checkpoint_dir = 'results/checkpoints'
-    os.makedirs(checkpoint_dir, exist_ok=True)
+    os.makedirs('results/checkpoints', exist_ok=True)
+    
+    # Initialize global model
     device = torch.device('cuda' if torch.cuda.is_available() else 'cpu')
-    client_ids = [fname.split('_')[1] for fname in os.listdir(processed_dir) if fname.endswith('_X.npy')]
-    global_model = FNN().to(device)
-    server = Server(global_model, config={})
-    num_rounds = 10
-    clients_per_round = min(5, len(client_ids))
-    for rnd in range(num_rounds):
-        selected = np.random.choice(client_ids, clients_per_round, replace=False)
-        client_states = []
-        for cid in selected:
-            X = np.load(os.path.join(processed_dir, f'client_{cid}_X.npy'))
-            y = np.load(os.path.join(processed_dir, f'client_{cid}_y.npy'))
-            dataset = HARDataset(X, y)
-            loader = DataLoader(dataset, batch_size=32, shuffle=True)
-            model = FNN().to(device)
-            model.load_state_dict(server.distribute())
-            client = Client(cid, model, loader, device, config={}, privacy_fn=add_dp_noise)
-            state_dict = client.train()
-            client_states.append(state_dict)
-        new_global_state = fedavg(client_states)
-        server.global_model.load_state_dict(new_global_state)
-        torch.save(server.global_model.state_dict(), os.path.join(checkpoint_dir, f'global_model_round_{rnd}.pt'))
-        print(f"Completed round {rnd+1}/{num_rounds}")
+    global_model = FNN(**MODEL_CONFIG).to(device)
+    
+    # Get all client files
+    client_files = [f for f in os.listdir(processed_dir) if f.endswith('_X.npy')]
+    
+    # Load all client data
+    clients_data = {}
+    for file in client_files:
+        client_id = file.split('_')[1]
+        X = np.load(os.path.join(processed_dir, f'client_{client_id}_X.npy'))
+        y = np.load(os.path.join(processed_dir, f'client_{client_id}_y.npy'))
+        clients_data[client_id] = (X, y)
+    
+    # Federated learning rounds
+    for round_num in range(FL_CONFIG['num_rounds']):
+        client_models = []
+        
+        # Sample clients for this round
+        selected_clients = np.random.choice(
+            list(clients_data.keys()), 
+            size=min(FL_CONFIG['clients_per_round'], len(clients_data)), 
+            replace=False
+        )
+        
+        # Train on selected clients
+        for client_id in selected_clients:
+            X, y = clients_data[client_id]
+            client_model_state = train_client_model(
+                client_id, X, y, global_model.state_dict(), 
+                epochs=TRAINING_CONFIG['local_epochs']
+            )
+            client_models.append(client_model_state)
+        
+        # Aggregate models
+        global_model_state = federated_averaging(client_models)
+        global_model.load_state_dict(global_model_state)
+        
+        # Save global model
+        torch.save(global_model.state_dict(), f'results/checkpoints/global_model_round_{round_num}.pt')
+        print(f"Completed round {round_num+1}/{FL_CONFIG['num_rounds']}")
 
 if __name__ == "__main__":
     main()

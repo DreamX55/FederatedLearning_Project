@@ -62,6 +62,7 @@ pip install -r requirements.txt
 
 1. **Preprocess the Data**
 python -m scripts.preprocess_data
+python -m scripts.data_validation
 
 2. **Train Local Models (Optional Baseline)**
 python -m scripts.train_local
