@@ -24,6 +24,11 @@ TRAINING_CONFIG = {
 # Federated learning configuration
 FL_CONFIG = {
     'num_rounds': 20,  # Increased from 10
-    'clients_per_round': 10,  # Participate more clients
+    'clients_per_round': 20,  # Participate more clients #Has been changed from 10 to 20
     'min_clients': 5
+}
+
+DP_CONFIG = {
+    'noise_multiplier': 0.05,
+    'clip_norm': 1.0
 }
