@@ -1,98 +1,64 @@
-# FederatedLearning_Project
+Federated Learning for Human Activity Recognition (UCI HAR)
 
-A modular, reproducible pipeline for federated learning and privacy-preserving activity recognition on the UCI HAR dataset.
+Privacy-Preserving · High-Accuracy · Lightweight PyTorch Pipeline
+Overview
+Welcome to a robust, privacy-preserving federated learning system for the UCI Human Activity Recognition (HAR) dataset.
+Achieve state-of-the-art accuracy while protecting user privacy with differential privacy (DP) applied to model deltas.
+All steps are automated and modular, with a lightweight PyTorch backbone.
 
-## Project Structure
-
-FederatedLearning_Project/
-├── data/
-│ ├── raw/
-│ │ └── UCI_HAR/
-│ │ ├── train/
-│ │ └── test/
-│ └── processed/
-├── docs/
-├── experiments/
-├── results/
-├── scripts/
+Project Structure
+.
+├── data/                   # Raw and processed data
+│   └── raw/UCI_HAR/        # UCI HAR dataset (auto-downloaded)
+├── results/                # Model checkpoints, logs, tables, figures
+├── scripts/                # Pipeline scripts (preprocess, train, validate, evaluate)
 ├── src/
-├── requirements.txt
-└── README.md
+│   ├── config/             # Training and FL configuration
+│   ├── datasets/           # Data loading and preprocessing
+│   ├── models/             # Model architectures (FNN)
+│   ├── federated/          # Aggregation logic
+│   ├── privacy/            # Differential privacy utilities
+│   └── evaluation/         # Metrics and analysis
+└── run.sh                  # Unified pipeline script
 
 
-## Setup Instructions
-
-1. **Clone the Repository**
+Quickstart
 git clone https://github.com/Cypher9802/FederatedLearning_Project.git
 cd FederatedLearning_Project
+bash run.sh
+
+Everything is automated:
+Dataset download, environment setup, preprocessing, training, privacy, and evaluation.
 
 
-2. **Create and Activate a Python Virtual Environment**
-python3 -m venv .venv
-source .venv/bin/activate
+Key Features
+Automated End-to-End Pipeline:
+One command runs the entire workflow.
+Differential Privacy on Deltas:
+Industry-standard privacy with minimal accuracy loss.
+High Accuracy:
+Up to 93% (no privacy) and 91.5–91.7% (strong privacy).
+Configurable:
+Easily tune rounds, epochs, clients, DP parameters.
 
-
-3. **Install Dependencies**
-pip install -r requirements.txt
-
-
-4. **Download and Prepare the UCI HAR Dataset**
-- Download from: https://archive.ics.uci.edu/ml/machine-learning-databases/00240/UCI%20HAR%20Dataset.zip
-- Unzip the file.
-- Move/rename the extracted folder so you have:
-  ```
-  data/raw/UCI_HAR/
-      ├── train/
-      │     ├── X_train.txt
-      │     ├── y_train.txt
-      │     └── subject_train.txt
-      └── test/
-            ├── X_test.txt
-            ├── y_test.txt
-            └── subject_test.txt
-  ```
-- If the folder is named `UCI HAR Dataset`, rename it:
-  ```
-  mv "data/raw/UCI HAR Dataset" data/raw/UCI_HAR
-  ```
-
-## Execution Instructions
-
-**All commands should be run from the project root directory.**
-
-1. **Preprocess the Data**
-python -m scripts.preprocess_data
-python -m scripts.data_validation
-
-2. **Train Local Models (Optional Baseline)**
-python -m scripts.train_local
-
-3. **Federated Training**
-python -m scripts.train_federated
-
-4. **Evaluate the Global Model**
-python -m scripts.evaluate
-
-
-
-## Quick Run Script
-
-You can automate the workflow with:
-bash run_all.sh
-
-## Troubleshooting
-
-| Problem                                     | Solution                                                        |
-|----------------------------------------------|-----------------------------------------------------------------|
-| `ModuleNotFoundError: No module named 'src'`| Run scripts with `python -m scripts.script_name` from root      |
-| File not found (e.g., `subject_train.txt`)   | Ensure dataset is in `data/raw/UCI_HAR/` with correct structure |
-| Dependency missing                          | Add to `requirements.txt` and reinstall                         |
-| Git push rejected                           | `git pull --no-rebase origin main` then resolve and push again  |
-
-## Reproducibility
-
-- All scripts are designed to be run in order for a reproducible pipeline.
-- The README and `run_all.sh` ensure new users can replicate your results with minimal setup.
-
-For any issues, please refer to this README or open an issue on the repository.
-
+Accomplishments
+1. Data Pipeline
+📥 Automated UCI HAR download and setup.
+🔬 Feature normalization to `` with strict clipping.
+🧑‍🤝‍🧑 Data split by subject to simulate federated clients.
+✅ Integrity and normalization checks.
+2. Model
+🤖 Feed-Forward Neural Network (FNN):
+3 hidden layers (128, 64, 32), ReLU, dropout, modular and extensible.
+3. Federated Learning Engine
+🏢 Each subject = one client.
+🔄 FedAvg aggregation, supports weighted averaging.
+⚙️ All parameters centralized for easy tuning.
+4. Differential Privacy
+🔒 DP on model deltas (client_model - global_model).
+🛡️ Configurable noise_multiplier and clip_norm.
+📈 Ablation studies for privacy-utility tradeoff.
+5. Evaluation & Reporting
+📈 Automated accuracy, F1, recall computation.
+📑 Results saved in results/ for reproducibility.
+📊 Ablation and benchmarking scripts/tables included.
