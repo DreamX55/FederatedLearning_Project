@@ -8,3 +8,5 @@ notebook
 tqdm
 loguru
 matplotlib
+seaborn
+opacus>=1.4.0
