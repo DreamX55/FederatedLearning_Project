@@ -1,0 +1,5 @@
+Global Model Evaluation Results
+Accuracy: 0.9118
+F1: 0.9115
+Recall: 0.9118
+Model used: results/checkpoints/global_model_round_19.pt
