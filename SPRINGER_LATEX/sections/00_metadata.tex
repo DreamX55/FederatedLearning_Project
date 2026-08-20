@@ -1,0 +1,20 @@
+% Sections/00_metadata.tex
+% Paper Title, Authors, Affiliations, Abstract, and Keywords.
+
+\title{Robust Human Activity Recognition through Federated Learning with Differential Privacy: A Comparison of Baseline and Centralized Models}
+\titlerunning{Robust HAR via FL with Differential Privacy}
+
+\author{Jonath Jimmi\inst{1} \and Arunkumar Balakrishnan\inst{2}}
+\authorrunning{J. Jimmi and A. Balakrishnan}
+
+\institute{School of Computer Engineering, Manipal Institute of Technology Bengaluru \and
+School of Computer Engineering, Manipal Institute of Technology Bengaluru\\
+\email{jonath.mitblr2024@learner.manipal.edu}\\
+\email{arunkumar.b@manipal.edu}}
+
+\maketitle
+
+\begin{abstract}
+Applications in wearable technology, health, and new environments are significantly enabled by Human Activity Recognition (HAR). The research uses the UCI HAR dataset of 10,299 labeled samples, 561 features, and 6 classes of activities that were obtained from 30 participants' smartphone accelerometer and gyroscope sensors. Simulation of real-world decentralised environments is presented through simulation of the distributed nature of data among 30 clients. In comparison to two baselines—a Feedforward Neural Network (FNN) and Random Forest (RF)—we contrast three highest-level deep learning methods: Federated Learning without Differential Privacy (FL), Federated Learning with DP (FL-DP), and Centralised Learning with DP (Central-DP)~\cite{mcmahan2017communication}. FL had the best accuracy at 93.6\%, followed by FL-DP (88.9\%) and Central-DP (84.6\%). Superiority of FL methods over baselines was verified when FNN realized 85.9\% and RF realized 84.4\%. Our findings demonstrate that although FL-DP provides robust privacy assurances at a loss of only a \~4.7\% decline in accuracy, best-class recognition accuracy is attained using FL without DP. Central-DP remains hampered by centralised data limitations but is improved with aggregated learning. Our results affirm federated learning as a robust, privacy-preserving solution to robust HAR in decentralised environments.
+\keywords{Federated Learning \and Centralised Learning \and Differential Privacy \and Feed Forward Network(FNN) \and Random Forest \and UCI HAR \and Explainable AI}
+\end{abstract}

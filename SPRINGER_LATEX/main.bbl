@@ -1,0 +1,75 @@
+\begin{thebibliography}{10}
+\providecommand{\url}[1]{\texttt{#1}}
+\providecommand{\urlprefix}{URL }
+\providecommand{\doi}[1]{https://doi.org/#1}
+
+\bibitem{abadi2016deep}
+Abadi, M., Chu, A., Goodfellow, I., McMahan, H.B., Mironov, I., Talwar, K.,
+  Zhang, L.: Deep learning with differential privacy. In: Proceedings of the
+  2016 ACM SIGSAC Conference on Computer and Communications Security. pp.
+  308--318 (2016)
+
+\bibitem{anguita2013public}
+Anguita, D., Ghio, A., Oneto, L., Parra, X., Reyes-Ortiz, J.L.: A public domain
+  dataset for human activity recognition using smartphones. In: 21st European
+  Symposium on Artificial Neural Networks, Computational Intelligence and
+  Machine Learning (ESANN). pp. 437--442 (2013)
+
+\bibitem{breiman2001random}
+Breiman, L.: Random forests. Machine Learning  \textbf{45}(1),  5--32 (2001)
+
+\bibitem{dwork2006differential}
+Dwork, C.: Differential privacy. In: International Colloquium on Automata,
+  Languages, and Programming (ICALP). pp. 1--12. Springer (2006)
+
+\bibitem{dwork2014algorithmic}
+Dwork, C., Roth, A.: The algorithmic foundations of differential privacy.
+  Foundations and Trends{\textregistered} in Theoretical Science
+  \textbf{9}(3--4),  211--407 (2014)
+
+\bibitem{geyer2017differentially}
+Geyer, R.C., Klein, T., Nabi, M.: Differentially private federated learning: A
+  client level perspective. arXiv preprint arXiv:1712.07557  (2017)
+
+\bibitem{goodfellow2016deep}
+Goodfellow, I., Bengio, Y., Courville, A.: Deep Learning. MIT Press (2016)
+
+\bibitem{li2020federated}
+Li, T., Sahu, A.K., Talwalkar, A., Smith, V.: Federated learning: Challenges,
+  methods, and future directions. IEEE Signal Processing Magazine
+  \textbf{37}(3),  50--60 (2020)
+
+\bibitem{lundberg2017unified}
+Lundberg, S.M., Lee, S.I.: A unified approach to interpreting model
+  predictions. In: Advances in Neural Information Processing Systems (NeurIPS).
+  pp. 4765--4774 (2017)
+
+\bibitem{mathew2024improved}
+Mathew, C., Asha, P.: Improved data privacy with differential privacy in
+  federated learning. Journal of Wireless Mobile Networks, Ubiquitous
+  Computing, and Dependable Applications  \textbf{15}(3),  262--280 (2024)
+
+\bibitem{mcmahan2017communication}
+McMahan, B., Moore, E., Ramage, D., Hampson, S., y~Arcas, B.A.:
+  Communication-efficient learning of deep networks from decentralized data.
+  In: Proceedings of the 20th International Conference on Artificial
+  Intelligence and Statistics (AISTATS). pp. 1273--1282 (2017)
+
+\bibitem{pedregosa2011scikit}
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel,
+  O., Blondel, M., Prettenhofer, P., Weiss, R., Dubourg, V., et~al.:
+  Scikit-learn: Machine learning in python. Journal of Machine Learning
+  Research  \textbf{12},  2825--2830 (2011)
+
+\bibitem{ribeiro2016why}
+Ribeiro, M.T., Singh, S., Guestrin, C.: "why should i trust you?": Explaining
+  the predictions of any classifier. In: Proceedings of the 22nd ACM SIGKDD
+  International Conference on Knowledge Discovery and Data Mining. pp.
+  1135--1144 (2016)
+
+\bibitem{zheng2021federated}
+Zheng, K., Chen, S., Long, Q., Su, W.J.: Federated f-differential privacy. In:
+  International Conference on Artificial Intelligence and Statistics (AISTATS).
+  pp. 2251--2259 (2021)
+
+\end{thebibliography}

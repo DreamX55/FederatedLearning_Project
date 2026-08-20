@@ -1,0 +1,52 @@
+% Sections/05_metrics.tex
+% Evaluation Metrics Section
+
+\section{Evaluation Metrics}
+\label{sec:metrics}
+
+To validate performance, we compute standard classification metrics, including accuracy and weighted F1-score.
+
+\subsection{Accuracy}
+\label{subsec:accuracy_metric}
+
+Accuracy measures the ratio of correctly predicted activities to total activities:
+
+\begin{equation}
+\label{eq:accuracy}
+\text{Accuracy} = \frac{\text{TP} + \text{TN}}{\text{TP} + \text{TN} + \text{FP} + \text{FN}}
+\end{equation}
+
+where TP is true positives, TN is true negatives, FP is false positives, and FN is false negatives.
+
+\subsection{F1-Score}
+\label{subsec:f1_metric}
+
+The F1-score balances precision and recall, especially useful for class distribution imbalances. Precision and Recall are defined as follows:
+
+\begin{equation}
+\label{eq:precision}
+\text{Precision} = \frac{\text{TP}}{\text{TP} + \text{FP}}
+\end{equation}
+
+\begin{equation}
+\label{eq:recall}
+\text{Recall} = \frac{\text{TP}}{\text{TP} + \text{FN}}
+\end{equation}
+
+Then, the standard F1-score is:
+
+\begin{equation}
+\label{eq:f1}
+\text{F1} = 2 \times \frac{\text{Precision} \times \text{Recall}}{\text{Precision} + \text{Recall}}
+\end{equation}
+
+For multi-class classifications, weighted F1-score aggregates F1-scores of classes weighted by class support:
+
+\begin{equation}
+\label{eq:f1_weighted}
+\text{F1}_{\text{weighted}} = \frac{\sum (\text{Support}_i \times \text{F1}_i)}{\sum \text{Support}_i}
+\end{equation}
+
+where $\text{F1}_i$ and $\text{Support}_i$ are the F1-score and sample support of activity class $i$.
+
+These metrics provide comprehensive evaluations of model stability, class-wise accuracy, and overall classification performance across baseline and advanced setups.

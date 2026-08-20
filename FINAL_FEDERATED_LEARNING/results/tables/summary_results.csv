@@ -1,0 +1,6 @@
+Experiment,Noise Multiplier,Clip Norm,Clients per Round,Local Epochs,Accuracy (%),F1 Score,Recall
+No DP (baseline),0.0,-,20,10,13.39,3.2,13.39
+DP on Deltas,0.01,5.0,20,10,93.1,93.1,93.1
+DP on Deltas,0.05,3.0,20,10,91.21,91.18,91.21
+DP on Deltas (Strong),0.1,2.0,20,10,85.5,86.4,85.4
+DP on Deltas (Strong),0.2,1.0,20,10,61.3,60.2,61.3

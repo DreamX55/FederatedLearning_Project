@@ -1,0 +1,12 @@
+torch>=1.7.1
+numpy
+pandas
+scikit-learn
+scipy
+pyyaml
+notebook
+tqdm
+loguru
+matplotlib
+seaborn
+opacus>=1.4.0

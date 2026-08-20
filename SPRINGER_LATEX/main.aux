@@ -1,0 +1,119 @@
+\relax 
+\citation{mcmahan2017communication}
+\citation{anguita2013public}
+\citation{mcmahan2017communication}
+\citation{abadi2016deep}
+\@writefile{toc}{\contentsline {title}{Robust Human Activity Recognition through Federated Learning with Differential Privacy: A Comparison of Baseline and Centralized Models}{1}{}\protected@file@percent }
+\@writefile{toc}{\authcount {2}}
+\@writefile{toc}{\contentsline {author}{Jonath Jimmi \and Arunkumar Balakrishnan}{1}{}\protected@file@percent }
+\@writefile{toc}{\contentsline {section}{\numberline {1}Introduction}{1}{}\protected@file@percent }
+\newlabel{sec:intro}{{1}{1}{}{section.1}{}}
+\citation{anguita2013public}
+\@writefile{lof}{\contentsline {figure}{\numberline {1}{\ignorespaces Client-Level Differentially Private Federated Learning architecture.}}{2}{}\protected@file@percent }
+\providecommand*\caption@xref[2]{\@setref\relax\@undefined{#1}}
+\newlabel{fig:architecture}{{1}{2}{}{figure.1}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {2}Dataset and Processing}{2}{}\protected@file@percent }
+\newlabel{sec:dataset}{{2}{2}{}{section.2}{}}
+\citation{mcmahan2017communication}
+\@writefile{toc}{\contentsline {subsection}{\numberline {2.1}Preprocessing Pipeline}{3}{}\protected@file@percent }
+\newlabel{subsec:preprocessing}{{2.1}{3}{}{subsection.2.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {2}{\ignorespaces Subject-Activity matrix shows distribution of activity sample across 30 subjects in the dataset}}{3}{}\protected@file@percent }
+\newlabel{fig:subject_activity}{{2}{3}{}{figure.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {3}Exploratory Data Analysis}{3}{}\protected@file@percent }
+\newlabel{sec:eda}{{3}{3}{}{section.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.1}Feature Value Distribution}{4}{}\protected@file@percent }
+\newlabel{subsec:feature_dist}{{3.1}{4}{}{subsection.3.1}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {3}{\ignorespaces Plot shows the visual analysis of every 50th feature with the median and outliers of each of them}}{4}{}\protected@file@percent }
+\newlabel{fig:feature_dist_plot}{{3}{4}{}{figure.3}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.2}Feature Correlation Matrix}{4}{}\protected@file@percent }
+\newlabel{subsec:correlation}{{3.2}{4}{}{subsection.3.2}{}}
+\citation{goodfellow2016deep}
+\citation{pedregosa2011scikit}
+\citation{breiman2001random}
+\@writefile{lof}{\contentsline {figure}{\numberline {4}{\ignorespaces Correlation matrix visualizing positive (red) and negative (blue) feature relations}}{5}{}\protected@file@percent }
+\newlabel{fig:correlation_matrix}{{4}{5}{}{figure.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {3.3}Distribution Pattern Insights}{5}{}\protected@file@percent }
+\newlabel{subsec:insights}{{3.3}{5}{}{subsection.3.3}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {4}Proposed Models}{5}{}\protected@file@percent }
+\newlabel{sec:models}{{4}{5}{}{section.4}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.1}Base Models}{5}{}\protected@file@percent }
+\newlabel{subsec:base_models}{{4.1}{5}{}{subsection.4.1}{}}
+\newlabel{subsubsec:fnn_model}{{4.1}{5}{}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Feed Forward Neural Network(FNN)}{5}{}\protected@file@percent }
+\newlabel{subsubsec:rf_model}{{4.1}{5}{}{subsection.4.1}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Random Forest}{5}{}\protected@file@percent }
+\citation{zheng2021federated}
+\citation{dwork2006differential}
+\@writefile{toc}{\contentsline {subsection}{\numberline {4.2}Advanced Models}{6}{}\protected@file@percent }
+\newlabel{subsec:advanced_models}{{4.2}{6}{}{subsection.4.2}{}}
+\newlabel{subsubsec:fl_model_desc}{{4.2}{6}{}{subsection.4.2}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Federated Learning (FL) Model}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {5}{\ignorespaces Federated model accuracy trade-off based on the amount of noise from 0-0.2}}{6}{}\protected@file@percent }
+\newlabel{fig:noise_tradeoff}{{5}{6}{}{figure.5}{}}
+\newlabel{subsubsec:fl_dp_model_desc}{{4.2}{6}{}{figure.5}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Federated Learning with Differential Privacy (FD+DP)}{6}{}\protected@file@percent }
+\newlabel{subsubsec:cl_dp_model_desc}{{4.2}{6}{}{figure.6}{}}
+\@writefile{toc}{\contentsline {subsubsection}{Centralized LSTM-CNN with Differential Privacy (CL+DP)}{6}{}\protected@file@percent }
+\@writefile{lof}{\contentsline {figure}{\numberline {6}{\ignorespaces The graph display FD+DP performs better than simulated expectations for set noise levels}}{7}{}\protected@file@percent }
+\newlabel{fig:fd_dp_perf}{{6}{7}{}{figure.6}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {7}{\ignorespaces Consistent accuracy rating with higher epoch rounds}}{7}{}\protected@file@percent }
+\newlabel{fig:cl_dp_acc}{{7}{7}{}{figure.7}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {5}Evaluation Metrics}{7}{}\protected@file@percent }
+\newlabel{sec:metrics}{{5}{7}{}{section.5}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.1}Accuracy}{7}{}\protected@file@percent }
+\newlabel{subsec:accuracy_metric}{{5.1}{7}{}{subsection.5.1}{}}
+\newlabel{eq:accuracy}{{1}{7}{}{equation.1}{}}
+\citation{geyer2017differentially}
+\@writefile{toc}{\contentsline {subsection}{\numberline {5.2}F1-Score}{8}{}\protected@file@percent }
+\newlabel{subsec:f1_metric}{{5.2}{8}{}{subsection.5.2}{}}
+\newlabel{eq:precision}{{2}{8}{}{equation.2}{}}
+\newlabel{eq:recall}{{3}{8}{}{equation.3}{}}
+\newlabel{eq:f1}{{4}{8}{}{equation.4}{}}
+\newlabel{eq:f1_weighted}{{5}{8}{}{equation.5}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {6}Results}{8}{}\protected@file@percent }
+\newlabel{sec:results}{{6}{8}{}{section.6}{}}
+\@writefile{lot}{\contentsline {table}{\numberline {1}{\ignorespaces Activity recognition accuracy and weighted F1-score comparison}}{8}{}\protected@file@percent }
+\newlabel{tab:results_comparison}{{1}{8}{}{table.1}{}}
+\citation{lundberg2017unified}
+\citation{ribeiro2016why}
+\@writefile{lof}{\contentsline {figure}{\numberline {8}{\ignorespaces Accuracy of FL with DP, making the distinction between ambulatory activity difficult}}{9}{}\protected@file@percent }
+\newlabel{fig:class_acc_fl_dp}{{8}{9}{}{figure.8}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {7}Explainable AI (XAI) Analysis}{9}{}\protected@file@percent }
+\newlabel{sec:xai}{{7}{9}{}{section.7}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.1}Global Interpretability (SHAP)}{9}{}\protected@file@percent }
+\newlabel{subsec:global_interpret}{{7.1}{9}{}{subsection.7.1}{}}
+\citation{dwork2014algorithmic,mathew2024improved}
+\citation{li2020federated}
+\bibstyle{splncs04}
+\bibdata{references}
+\bibcite{abadi2016deep}{1}
+\newlabel{fig:shap_fl_dp}{{9a}{10}{}{subfigure.9.1}{}}
+\newlabel{sub@fig:shap_fl_dp}{{a}{10}{}{subfigure.9.1}{}}
+\newlabel{fig:shap_cl_dp}{{9b}{10}{}{subfigure.9.2}{}}
+\newlabel{sub@fig:shap_cl_dp}{{b}{10}{}{subfigure.9.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {9}{\ignorespaces SHAP feature importance comparison between FL + DP (left) and Centralized + DP (right)}}{10}{}\protected@file@percent }
+\newlabel{fig:shap_comparison}{{9}{10}{}{figure.9}{}}
+\@writefile{toc}{\contentsline {subsection}{\numberline {7.2}Local Interpretability (LIME)}{10}{}\protected@file@percent }
+\newlabel{subsec:local_interpret}{{7.2}{10}{}{subsection.7.2}{}}
+\@writefile{toc}{\contentsline {section}{\numberline {8}Conclusion}{10}{}\protected@file@percent }
+\newlabel{sec:conclusion}{{8}{10}{}{section.8}{}}
+\bibcite{anguita2013public}{2}
+\bibcite{breiman2001random}{3}
+\bibcite{dwork2006differential}{4}
+\bibcite{dwork2014algorithmic}{5}
+\bibcite{geyer2017differentially}{6}
+\bibcite{goodfellow2016deep}{7}
+\bibcite{li2020federated}{8}
+\bibcite{lundberg2017unified}{9}
+\bibcite{mathew2024improved}{10}
+\bibcite{mcmahan2017communication}{11}
+\bibcite{pedregosa2011scikit}{12}
+\bibcite{ribeiro2016why}{13}
+\newlabel{fig:lime_central}{{10a}{11}{}{subfigure.10.1}{}}
+\newlabel{sub@fig:lime_central}{{a}{11}{}{subfigure.10.1}{}}
+\newlabel{fig:lime_federated}{{10b}{11}{}{subfigure.10.2}{}}
+\newlabel{sub@fig:lime_federated}{{b}{11}{}{subfigure.10.2}{}}
+\@writefile{lof}{\contentsline {figure}{\numberline {10}{\ignorespaces LIME instance explanations for Centralized (left) and Federated (right) standing prediction}}{11}{}\protected@file@percent }
+\newlabel{fig:lime_comparison}{{10}{11}{}{figure.10}{}}
+\bibcite{zheng2021federated}{14}
+\gdef \@abspage@last{12}

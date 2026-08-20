@@ -3,10 +3,21 @@ __pycache__/
 *.py[codz]
 *$py.class
 
-#Actual Files
-data/processed
-data/raw
-results/checkpoints
+# Data & Datasets
+data/
+FINAL_FEDERATED_LEARNING/data/
+*.zip
+*.npy
+*.arff
+*.csv.gz
+
+# Model checkpoints & Binaries
+*.pt
+*.pth
+results/checkpoints/
+FINAL_FEDERATED_LEARNING/results/checkpoints/
+models/*.pt
+FINAL_FEDERATED_LEARNING/models/*.pt
 
 # C extensions
 *.so

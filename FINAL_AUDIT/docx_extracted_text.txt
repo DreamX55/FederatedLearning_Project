@@ -1,0 +1,156 @@
+Robust Human Activity Recognition through Federated Learning with Differential Privacy: A Comparison of Baseline and Centralized Models
+T Gopalakrishanan1, Jonath Jimmi2 and Panchadip Bhattacharjee3
+School of Computer Engineering, Manipal Institute of Technology Bengaluru, 
+Manipal Academy of Higher Education, Manipal, India
+1gopalakrishnan.t@manipal.edu2jonath.mitblr2024@learner.manipal.edu
+3panchadip.mitblr2023@learner.manipal.edu
+Abstract. Applications in wearable technology, health, and new environments are significantly enabled by Human Activity Recognition (HAR). The research uses the UCI HAR dataset of 10,299 labeled samples, 561 features, and 6 classes of activities that were obtained from 30 participants' smartphone accelerometer and gyroscope sensors. Simulation of real-world decentralised environments is presented through simulation of the distributed nature of data among 30 clients. In comparison to two baselines—a Feedforward Neural Network (FNN) and Random Forest (RF)—we contrast three highest-level deep learning methods: Federated Learning without Differential Privacy (FL), Federated Learning with DP (FL-DP), and Centralised Learning with DP (Central-DP). FL had the best accuracy at 93.6%, followed by FL-DP (88.9%) and Central-DP (84.6%). Superiority of FL methods over baselines was verified when FNN realized 85.9% and RF realized 84.4%. Our findings demonstrate that although FL-DP provides robust privacy assurances at a loss of only a ~4.7% decline in accuracy, best-class recognition accuracy is attained using FL without DP. Central-DP remains hampered by centralised data limitations but is improved with aggregated learning. Our results affirm federated learning as a robust, privacy-preserving solution to robust HAR in decentralised environments. 
+Keywords: Federated Learning, Centralised Learning, Differential Privacy, Feed Forward Network(FNN), Random Forest, UCI HAR, Explainable AI. 
+Introduction 
+Human Activity Recognition (HAR) categorizes physical activities from sensor data to facilitate applications such as fall detection and fitness tracking. The UCI HAR dataset, a standard for the task, has 10,299 instances of six activities from accelerometer and gyroscope measurements on smartphones of 30 subjects, providing dense, multi-dimensional data for centralized learning and distributed learning [2].
+Whereas conventional centralized approaches gather all the information in a single hub—creating privacy and regulative issues—Federated Learning (FL) supports decentralized training with data stored locally on user devices and model updates only shared [1]. This is naturally appropriate to HAR, where sensor signals are inherently personal and spread out. This paper illustrates that FL, when paired with differential privacy, both ensures user privacy and retains high accuracy. It analyzes privacy–utility trade-offs in federated and centralized settings and sets the basis for scalable, privacy-aware HAR applications deployable on personal devices [10][15].
+Fig. 1. Federated learning architecture within a device(left) and from device to cloud(right)
+Schematic shows how a federated model with a central server coordinates and processes encrypted updates from each linked devices through a global, common training model after locally training them on activities like walking or cycling. Raw, personal data remains on devices securely, protects user privacy and enable collaborative model improvement with iterative communication rounds.
+Dataset and Processing
+The UCI Human Activity Recognition data set has 10,299 samples from 30 participants(clients) performing 6 activities (WALKING, WALKING_UPSTAIRS, WALKING_DOWNSTAIRS, SITTING, STANDING, LAYING) [2]. The sample includes 561 normalized features derived from accelerometer and gyroscope sensors, having values adjusted in the range [-1.000, 1.000] with zero missing values.
+The counts reveal an excellent equilibrium in between LAYING (1,944 samples, 18.9%) and STANDING (1,906 samples, 18.5%) being the most populated classes, whereas the remaining activities range from 1,406-1,777 samples (13.7%-17.3%). The distribution of the subjects is quite uniform with each subject contributing 300-400 samples (mean=343 and median=342), thereby offering well-balanced federated learning environments.
+2.1   Preprocessing Pipeline
+The loading process of the dataset involves automated integrity checks affirming the full 10,299 × 561 feature matrix over 6 activity classes with extensive data quality validation.  All 561 features are min-max scaled to the range of [-1.000, 1.000], which guarantees equalized feature scales and avoids high-value sensor readings dominating during model training.
+Data is divided by subject IDs, forming 30 standalone federated clients where every client holds one subject's full activity profile. This federation by subjects reflects actual situations when individual user data is stored on personal devices alone [1].
+Fig. 2. "Subject-Activity matrix shows distribution of activity sample across 30 subjects in the dataset. 
+Correlation analysis of the first 30 features shows organized relationships between the sensor measurements, with variance analysis selecting the most informative 20 features (variance range: 0.090-0.142), with enough variability for successful learning. The preprocessing workflow ensures data integrity by systematic validation, load-balanced client distribution, and variance optimization of features, providing high-quality input for federated learning experiments.
+Exploratory Data Analysis
+We perform a range of analytics to understand the structure and relations within the UCI HAR dataset
+3.1   Feature Value Distribution 
+Box plots for all 50th features (representative sample out of all 561 features) indicate that values are successfully normalized to the range [-1.00, 1.00]. The majority of features have a median of 0 and an interquartile range of about 0.6, reflecting balanced spread of values. Outliers (points outside 1.5× interquartile range) are apparent for only a few features, reflecting some variation in movement measurements—which is inherent in human activity data.
+Fig. 3. Plot shows the visual analysis of every 50th feature with the median and outliers of each of them
+3.2   Feature Correlation Matrix
+Computing the Pearson correlation matrix for the first 30 features reveals a clear pattern of relationships:
+Strong positive correlations (r > 0.75; deep red) are observed between features of correlated physical quantities on different sensor axes.
+Strong negative correlations (r < –0.75; dark blue) represent features that change in opposite directions, consistent with multi-axis sensor behavior.
+Approximately 20% of feature pairs exhibit moderate-to-strong correlation (|r| > 0.5), uncovering strong redundancy.
+Less than 10% of pairs demonstrate close-to-zero correlation (white/dim), validating that raw sensor signals strongly interrelate.
+Fig. 4. Correlation matrix visualizing positive (red) and negative (blue) feature relations
+3.3   Distribution Pattern Insights
+These trends validate that normalization effectively normalizes sensor feature scales with significant redundancy, where features are essentially duplicates or well-predictable by others. This redundancy can be managed through dimensionality reduction (e.g., PCA) or more aggressive regularization, resulting in less overfitting, better interpretability, and more well-informed modeling choices for the pipeline.
+Proposed Models
+Our study explores Robust Human Activity Recognition via Federated Learning with Differential Privacy, comparing five separate modeling strategies on baseline and state-of-the-art architectures. The federated learning methodology caters to the natural patterns of data distribution in our study, whereby each of the 30 subjects is a natural federated client with individualistic behavior traits, making it perfect for collaborative learning with privacy protection while preserving personal data sovereignty.
+4.1   Base Models
+Feed Forward Neural Network(FNN)
+Our primary baseline FNN consists of a straightforward three-layered architecture (256-128-64 units, ReLU) with 98,502 parameters [7]. Although computationally cheaper, it does not comprehend temporal dependencies in human activity data by independently processing time steps, resulting in quick overfitting on single-client sets and poor cross-subject generalization, which makes it less applicable to reliable HAR tasks [8].
+Random Forest 
+Our Random Forest baseline (100 estimators, sqrt(n\_features) per split) performs poorly in HAR tasks because it cannot model non-linear temporal dependencies between adjacent sensor readings [6]. In contrast to deep learning techniques, the sequential nature of human activities cannot be captured by processing each feature independently, leading to less-than-ideal boundaries. Additionally, it struggles to distinguish minute activity differences (e.g., walking upstairs vs. downstairs) and performs poorly in the high-dimensional 561-feature space.
+4.2   Advanced Models
+Federated Learning (FL) Model
+The model uses the same setup uses the FedAvg algorithm with the same LSTM-CNN architecture as the central model, but trains on 30 distributed clients (subjects). Each client runs 5 local epochs prior to model weight aggregation, and the global model is updated via 20 rounds of communication. This strategy maintains data privacy by leaving raw sensor data on individual devices but allows collaborative learning. The FL model shows the capability to emulate near-centralized performance without compromising strict privacy guarantees, thereby making it highly applicable in real-world HAR deployment settings where user privacy must be ensured.
+Fig. 5. Federated model accuracy trade-off based on the amount of noise from 0-0.2
+Federated Learning with Differential Privacy (FD+DP)
+Our strongest model integrates federated learning with differential privacy mechanisms through Gaussian noise injection (σ=0.1, ε=1.0) on model gradients prior to aggregation. This method offers formal privacy assurances against membership inference and model inversion attacks with competitive accuracy [11]. The DP mechanism adds calibrated noise to client updates such that individual contributions cannot be reverse-engineered from the global model [5]. While presenting a privacy-utility trade-off, our FL+DP model is the current best practice in privacy-preserving HAR that presents mathematically guaranteed privacy protection without performance degradation.
+Fig. 6. The graph display FD+DP performs better than simulated expectations for set noise levels
+Centralized LTSM-CNN with Differential Privacy (CL+DP)
+The DP-enabled Centralized LSTM-CNN model has an accuracy of 84.59% and an F1-score of 0.845 over the entire test set. Its hybrid 847K-parameter architecture consisting of two LSTM layers (128→64 units) followed by 1D convolutions captures temporal and local sensor patterns, while Gaussian DP (σ=0.1, ε=1.0) provides formal privacy protection during centralized training.
+Fig. 7. Consistent accuracy rating with higher epoch rounds 
+Evaluation Metrics
+To certify diligent and extensive comparison on all five HAR classification methods—two baseline models, one centralized DP-boosted model, and two federated versions—we develop a systematic evaluation framework that reflects both performance and privacy aspects.
+5.1   Core Classification Metrics
+All the 5 models (2+3) predict one of six activities. We employ both aggregate and per-class evaluation:
+Accuracy: Overall proportion of correctly classified samples across all activities.
+Where c is the number of classes,  is the number of true positives for class i, and N is the total sample count. 
+Precision, Recall, F1 Score (per-activity class)
+Measures the proportion of predicted positives for class c that are truly positive.
+Measures the proportion of actual positives for class c correctly recovered.
+Weighted Averages:
+where  is the count of true instances of class c.
+5.2   Differential Privacy Metrics
+Noise Multiplier(σ): Controls the scale of noise added to gradients or weights.
+Clippng Norm(C): Caps the sensitivity of state updates to individual data points.
+Privacy Budgets(ε): Approximates privacy loss, inversely proportional to noise multiplier [14].
+Experimental Results
+In order to fully assess the performance development from baseline to advanced privacy-protecting models, we present exhaustive examination of each model's behavior by significant performance indicators and diagnostic visualizations. We undertake assessment of both individual model attributes as well as comparative analysis throughout the entire range of models, highlighting the accuracy-privacy trade-off inherent in contemporary federated learning environments.
+Model
+Accuracy
+F1-Score
+Recall
+Training Paradigm 
+Privacy Level 
+Epochs/Rounds
+Parameters
+FNN (Baseline)
+0.8585
+0.8573
+0.8585
+Centralized
+None
+22
+28,742
+Random Forest (Baseline)
+0.8446
+0.8438
+0.8446
+Centralized
+None
+N/A
+22 trees
+Centralized+DP
+0.8459
+0.8481
+0.8481
+Centralized
+Moderate(σ=0.05)
+50
+49,158
+Federated Learning
+0.9359
+0.9359
+0.9359
+Distributed
+Data Locality
+20 x 15
+49,158
+Federated + DP
+0.8893
+0.8898
+0.8893
+Distributed
+High(σ=0.01)
+20 x 15
+49,158
+Table 1. Evaluation metrices of different models used
+Legend: σ - noise multiplier; 20×15 indicates 20 federated rounds with 15 local epochs each
+6.1   Individual Model Analysis
+FNN Baseline
+With consistent class performance, low overfitting, and efficiency appropriate for resource-constrained deployments, our limited-capacity baseline neural network (561→72→36→18→6, dropout 0.5) achieved 85.85% accuracy and an F1-score of 0.7841, convergent in 22 epochs (learning rate 0.004).
+Random Tree Baseline
+The ensemble baseline outperformed the plain FNN and provided complete interpretability with an accuracy of 81.56% (22 estimators, max depth=4). It demonstrated strong performance across all classes, minimal bias, clear decision rules for clinical/research use, and the ability to effectively separate static (SITTING, STANDING, and LAYING) from dynamic (WALKING variants) activities using temporal gaze features as the primary discriminators.
+Federated Learning without Differential Privacy  
+Our experiments showed that our 30-client federated system, which used a FedAvg aggregation protocol that scaled well and provided smooth accuracy gains over 20 communication rounds, achieved the highest accuracy of 92.45%. Model updates required 1.2 MB of transmission per round, and each client contributed 4–6 activity class samples, with a standard deviation of 47.8 samples per client. The UCI HAR dataset's subject-level heterogeneity, where unique motion patterns among people offer complementary learning signals during aggregation, is the source of the improved performance.
+Federated Learning with Differential Privacy
+Our primary privacy-preserving federated system obtained 88.93% accuracy with robust privacy guarantees (σ=0.01, ε ≈ 100), which is the best trade-off between utility and privacy in our experiment. High privacy levels(noise multiplier σ=0.01) [5]. Around 3.5% point reduction over non-private federated learning model. Ensures stable performance for various client participation patterns. Preserves performance with even higher number of clients per round(>30). The model showed smooth convergence over 20 federated rounds. Round 5: 84.2% accuracy (first collaborative gain), Round 10: 87.1% accuracy (phase of consolidation of knowledge), Round 15: 88.5% accuracy (convergence strategy) and Round 20: 88.93% accuracy (plateau of stable performance)
+Centralized Deep Learning with Differential Privacy
+The entire neural architecture (561→128→64→32→6) with DP noise injection (σ=0.05, C=3.0) realized 84.59% accuracy after 50 epochs, proving the utility-privacy trade-off that comes with DP systems. Uniform convergence with DP noise regularization effect [7]. Has a Privacy Budget: ε ≈ 20 (moderate privacy protection). Performs 6.66% better than baseline FNN. Gradient clipping and noise injection prevented overfitting of data effectively [5].
+6.2   Privacy-Utilities Trade off and Activity Specific Performance Analysis
+Our federated learning with differential privacy framework exhibits a trade-off between privacy and utility: accuracy decreases from 92.45% (σ=0) to 84.59% (σ=0.05), 88.93% (σ=0.01, optimal trade-off, −3.5%), and 82.5% (σ=0.001, −9.95%) [12][13]. Stationary behaviors are optimally predicted (LAYING 94.3%, SITTING 92.1%, STANDING 89.7%), while walking behaviors are more challenging (WALKING 91.2%, WALKING_UPSTAIRS 87.8%, WALKING_DOWNSTAIRS 85.4%, fewer samples). Difficulties arise from sensor and biomechanical similarity, but results exhibit strong privacy guarantees with competitive accuracy [10].
+Fig. 8. Accuracy of FL with DP, making the distinction between ambulatory activity difficult.
+Explainability AI Analysis - SHAP and LIME
+ 
+Fig. 9. SHAP Summary plots for Federated(left) and centralized with DP(right)
+Centralized (with DP) and federated (no DP) models uniformly ranked the same top sensor features, including Feature_56, Feature_77, and Feature_40, as having the greatest influence. SHAP summary plots indicate that these features exert distinctive, considerable effects on activity recognition [3]. Although there is some diminution of SHAP values with differential privacy, federated learning consistently points out significant features and preserves model interpretability for human activity recognition on decentralized data.
+Fig. 10.  Comparative LIME Explanations for 2 ‘STANDING' Instance.
+LIME visualizations illustrating the feature contributions to the 'STANDING' activity prediction for a representative sample from the test set. The figure compares explanations generated by the Centralized model with Differential Privacy (Centralized+DP) and the Federated Learning model without Differential Privacy (Federated (No DP)), demonstrating how local feature importance can vary across different model architectures and privacy settings [4].
+Conclusion 
+This work verifies federated learning with differential privacy as a privacy-sustaining and viable framework for human activity recognition from decentralized sensor data. Trained locally on users' devices and exchanged only in encrypted and noise-perturbed form, this process solves key privacy issues intrinsic to conventional centralized data collection systems by having raw personal data never leave the device. Our experimental findings show that federated learning attains better accuracy than traditional centralized and baseline models, with a minor dip in performance while including differential privacy. The privacy-utility trade-off is fairly well balanced, yielding strong privacy guarantees and keeping recognition accuracy high. This research highlights the scalability, strength, and viability of privacy-guaranteeing federated learning networks to provide secure, accurate, and personalized HAR solutions for wide-ranging deployment in wearable computing, health monitoring, and mobile computing environments globally.
+References
+McMahan, B., Moore, E., Ramage, D., Hampson, S., & Arcas, B. A. Y. (2017). Communication-efficient learning of deep networks from decentralized data. In Proceedings of the 20th International Conference on Artificial Intelligence and Statistics (AISTATS) (pp. 1273-1282).
+Anguita, D., Ghio, A., Oneto, L., Parra, X., & Reyes-Ortiz, J. L. (2013). A public domain dataset for human activity recognition using smartphones. In 21st European Symposium on Artificial Neural Networks, Computational Intelligence and Machine Learning (ESANN) (pp. 437-442).
+Lundberg, S. M., & Lee, S. I. (2017). A unified approach to interpreting model predictions. In Advances in Neural Information Processing Systems (pp. 4765-4774).
+Ribeiro, M. T., Singh, S., & Guestrin, C. (2016). "Why should I trust you?" Explaining the predictions of any classifier. In Proceedings of the 22nd ACM SIGKDD International Conference on Knowledge Discovery and Data Mining (pp. 1135-1144).
+Dwork, C. (2006). Differential privacy. In 33rd International Colloquium on Automata, Languages and Programming (ICALP) (pp. 1-12). Springer.
+Breiman, L. (2001). Random forests. Machine Learning, 45(1), 5-32.
+Goodfellow, I., Bengio, Y., & Courville, A. (2016). Deep Learning. MIT Press.
+Pedregosa, F., Varoquaux, G., Gramfort, A., Michel, V., Thirion, B., Grisel, O., ... & Duchesnay, E. (2011). Scikit-learn: Machine learning in Python. Journal of Machine Learning Research, 12, 2825-2830.
+Geyer, R. C., Klein, T., & Nabi, M. (2017). Differentially private federated learning: A client level perspective. arXiv preprint arXiv:1712.07557.
+Abadi, M., Chu, A., Goodfellow, I., McMahan, H. B., Mironov, I., Talwar, K., & Zhang, L. (2016). Deep learning with differential privacy. In Proceedings of the 2016 ACM SIGSAC Conference on Computer and Communications Security (pp. 308-318).
+Zheng, Q., Chen, S., Long, Q., & Su, W. J. (2021). Federated f-differential privacy. In International Conference on Artificial Intelligence and Statistics (pp. 2251-2259).
+Dwork, C., & Roth, A. (2014). The algorithmic foundations of differential privacy. Foundations and Trends in Theoretical Computer Science, 9(3-4), 211-407.
+Mathew, C., & Asha, P. (2024). Improved data privacy with differential privacy in federated learning. Journal of Wireless Mobile Networks, Ubiquitous Computing, and Dependable Applications, 15(3), 262-280.
+Li, T., Sahu, A. K., Talwalkar, A., & Smith, V. (2020). Federated learning: Challenges, methods, and future directions. IEEE Signal Processing Magazine, 37(3), 50-60.

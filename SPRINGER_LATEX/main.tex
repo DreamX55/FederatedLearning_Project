@@ -1,0 +1,43 @@
+% docs/paper_draft/main.tex
+% Robust Human Activity Recognition through Federated Learning with Differential Privacy
+\documentclass[runningheads]{llncs}
+
+% Load packages, macros, and custom commands
+\input{styles/packages.tex}
+\input{styles/macros.tex}
+\input{styles/commands.tex}
+
+\begin{document}
+
+% Section 0: Title, authors, affiliations, abstract, keywords
+\input{sections/00_metadata.tex}
+
+% Section 1: Introduction
+\input{sections/01_introduction.tex}
+
+% Section 2: Dataset and Processing
+\input{sections/02_dataset.tex}
+
+% Section 3: Exploratory Data Analysis
+\input{sections/03_eda.tex}
+
+% Section 4: Proposed Models
+\input{sections/04_models.tex}
+
+% Section 5: Evaluation Metrics
+\input{sections/05_metrics.tex}
+
+% Section 6: Experimental Results
+\input{sections/06_results.tex}
+
+% Section 7: Explainability AI Analysis - SHAP and LIME
+\input{sections/07_xai.tex}
+
+% Section 8: Conclusion
+\input{sections/08_conclusion.tex}
+
+% Bibliography Setup
+\bibliographystyle{splncs04}
+\bibliography{references}
+
+\end{document}
